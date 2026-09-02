@@ -1,0 +1,1 @@
+vcs -f file.f -full64 -R -debug_access+all +define+GLS_FSDB +maxdelays -negdelay +neg_tchk +define+GLS_FSDB +define+GATE

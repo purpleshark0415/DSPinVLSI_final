@@ -1,0 +1,27 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "jupyter.kernels.filter": [],
+
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk (minted, build dir)",
+      "command": "latexmk",
+      "args": [
+        "-pdf",
+        "-shell-escape",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-outdir=build",
+        "-auxdir=build",
+        "%DOCFILE%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk (minted, build dir)",
+      "tools": ["latexmk (minted, build dir)"]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "latexmk (minted, build dir)"
+}

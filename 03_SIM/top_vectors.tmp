@@ -1,0 +1,44 @@
+=== S(N) CSD 分析 (級數=12, 精度=14 bits) ===
+理想 S(N) 值 : 0.607253
+CSD S(N) 值  : 0.607239
+CSD 表示法   : +0+00-00-00-0+ (左側為 MSB, 右側為 LSB，對應 2^-1 到 2^-14)
+非零位元數   : 6
+需要加/減法器: 5 個
+
+// Bit-true golden for Matrix(:,:,8) — pattern index 7
+// Model: 04_PYTHON/01_bit_true.ipynb cell 4 (integer, round-half-up)
+// Source: /Users/purpleshark0415/Documents/DSP_in_VLSI/final project/03_SIM/../04_PYTHON/Final11Pattern.mat
+// STAGES=12 DATA_FRAC_BITS=12 INT_BITS=6 TOTAL_BITS=18 S_FRAC_BITS=14 ITERATIONS=7
+
+=== S(N) CSD 分析 (級數=12, 精度=14 bits) ===
+理想 S(N) 值 : 0.607253
+CSD S(N) 值  : 0.607239
+CSD 表示法   : +0+00-00-00-0+ (左側為 MSB, 右側為 LSB，對應 2^-1 到 2^-14)
+非零位元數   : 6
+需要加/減法器: 5 個
+
+// Input matrix (float from .mat)
+//   [  0.48598617   0.46159623  -0.75962484]
+//   [  0.46159623   1.15364693   1.29990493]
+//   [ -0.75962484   1.29990493   6.90454483]
+
+// Quantized input columns (InData_row1/2/3 per InValid cycle)
+in_col[0] = '{18'sd1990, 18'sd1890, -18'sd3112};
+in_col[1] = '{18'sd1890, 18'sd4725, 18'sd5324};
+in_col[2] = '{-18'sd3112, 18'sd5324, 18'sd28281};
+
+// Expected OutValid sequence (4 cycles)
+golden_eig = '{18'sd29673, 18'sd5326, 18'sd1};
+golden_u_col[0] = '{18'sd400, -18'sd814, -18'sd3983};
+golden_u_col[1] = '{18'sd2330, 18'sd3329, -18'sd457};
+golden_u_col[2] = '{18'sd3345, -18'sd2232, 18'sd787};
+
+// Float interpretation (debug)
+// eigenvalues: [array([0.09765625, 0.56884766, 0.81665039]), array([-0.19873047,  0.81274414, -0.54492188]), array([-0.97241211, -0.11157227,  0.19213867])]
+// U row 0: [np.float64(0.09765625), np.float64(0.56884765625), np.float64(0.816650390625)]
+// U row 1: [np.float64(-0.19873046875), np.float64(0.812744140625), np.float64(-0.544921875)]
+// U row 2: [np.float64(-0.972412109375), np.float64(-0.111572265625), np.float64(0.192138671875)]
+
+// np.linalg.eigh (desc): [np.float64(7.246852728325291), np.float64(1.2971724221141858), np.float64(0.00015279193822287097)]
+// eigenvalue RMSE vs eigh (desc): 4.445402e+00
+// Wrote 00_TESTBED/input.txt, golden_output.txt
